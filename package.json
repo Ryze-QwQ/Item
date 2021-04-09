@@ -58,6 +58,8 @@
     "react-app-polyfill": "^2.0.0",
     "react-dev-utils": "^11.0.3",
     "react-dom": "^17.0.1",
+    "react-drag": "^2.0.3",
+    "react-draggable": "^4.4.3",
     "react-mobx": "0.0.4",
     "react-refresh": "^0.8.3",
     "react-router": "^5.2.0",

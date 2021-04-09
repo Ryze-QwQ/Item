@@ -54,11 +54,16 @@
          }
         
     }
+    &-rightPart{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
     &-topBar{
         height: 66px;
-        flex-grow: 1;
         display: flex;
         justify-content: space-between;
+        flex-shrink: 0;
         align-items: center;
         background-color: $normal_font_color;
         box-shadow: 1px 0 1px 1px #ccc;
@@ -75,5 +80,13 @@
                 color: $dark_icon_color !important;
             }
         }
+    }
+    &-content{
+        flex: 1;
+        margin: 16px 16px 0 16px;
+        background-color: $normal_font_color;
+        box-shadow: -1px 0 2px 1px #ddd, 1px 0 2px 1px #ddd;
+        padding: 8px 12px;
+        overflow: hidden;
     }
 }

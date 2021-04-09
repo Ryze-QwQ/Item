@@ -1,12 +1,13 @@
 import { Component } from 'react'
 import { routes } from './App.route'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import './App.scss'
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <Router>
+        <Redirect path="/" to="/home" />
         <Switch>
           {
             routes.map(router => {
@@ -19,7 +20,7 @@ class App extends Component {
             })
           }
         </Switch>
-      </BrowserRouter>
+      </Router>
     )
   }
 }
