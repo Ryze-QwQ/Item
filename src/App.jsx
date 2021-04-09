@@ -11,6 +11,7 @@ class App extends Component {
           {
             routes.map(router => {
               return <Route
+                key={router.path}
                 path={router.path}
                 component={router.component}
                 exact={router.exact}
