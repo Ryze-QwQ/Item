@@ -3,24 +3,22 @@ import { observer } from 'mobx-react'
 import { Menu } from 'antd';
 import {
     ContainerOutlined,
-    DownOutlined,
     BellOutlined,
     SettingOutlined,
     PoweroffOutlined
 } from '@ant-design/icons/lib';
 import { HomeStore } from './home.store';
 import './home.scss';
-import head from '../../assets/head.jpg';
-import { Route, Link, HashRouter as Router, Switch, Redirect } from 'react-router-dom';
+import logo from '@/assets/logo.svg';
+import { Route, Link, HashRouter as Router, Switch } from 'react-router-dom';
 import { routes } from './home.route';
 
 @observer
 class Home extends Component {
     className = 'home';
 
-
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.store = new HomeStore();
     }
     handleSelectNav = (item) => {
@@ -33,30 +31,29 @@ class Home extends Component {
             <div className={this.className}>
                 <div className={this.className + '-leftMenu'} >
                     <div className={this.className + '-leftMenu-head'}>
-                        <img src={head} alt="头像" className={this.className + '-leftMenu-head-img'} />
-                        <div className={this.className + '-leftMenu-head-info'} >
-                            <div className={this.className + '-leftMenu-head-name'}>Admin</div>
-                            <DownOutlined className={this.className + '-leftMenu-head-icon'} />
-                        </div>
+                        <img src={logo} alt="logo" className={this.className + '-leftMenu-head-img'} />
+                        <div className={this.className + '-leftMenu-head-name'}>Team Work</div>
                     </div>
                     <Menu
                         defaultSelectedKeys={['1']}
                         mode="vertical"
                         theme="dark"
-                        inlineCollapsed={false}
                         onClick={this.handleSelectNav}
                     >
                         <Menu.Item key={navTitles[0]} icon={<ContainerOutlined />}>
-                            <Link to="/home/dashboard">{navTitles[0]}</Link>
+                            <Link to="/home">{navTitles[0]}</Link>
                         </Menu.Item>
                         <Menu.Item key={navTitles[1]} icon={<ContainerOutlined />}>
-                            {navTitles[1]}
+                            <Link to="/home/dashboard">{navTitles[1]}</Link>
                         </Menu.Item>
                         <Menu.Item key={navTitles[2]} icon={<ContainerOutlined />}>
-                            {navTitles[2]}
+                            <Link to="/home/project">{navTitles[2]}</Link>
                         </Menu.Item>
                         <Menu.Item key={navTitles[3]} icon={<ContainerOutlined />}>
-                            <Link to="/home/person">{navTitles[3]}</Link>
+                            <Link to="/home/total">{navTitles[3]}</Link>
+                        </Menu.Item>
+                        <Menu.Item key={navTitles[4]} icon={<ContainerOutlined />}>
+                            <Link to="/home/person">{navTitles[4]}</Link>
                         </Menu.Item>
                     </Menu>
                 </div>
@@ -68,12 +65,11 @@ class Home extends Component {
                         <div className={this.className + '-topBar-operation'}>
                             <BellOutlined className={this.className + '-topBar-icon'} />
                             <SettingOutlined className={this.className + '-topBar-icon'} />
-                            <Link to="/login" ><PoweroffOutlined className={this.className + '-topBar-icon'} /></Link>
+                            <Link to="/" ><PoweroffOutlined className={this.className + '-topBar-icon'} /></Link>
                         </div>
                     </div>
                     <div className={this.className + '-content'}>
-                        <Router basename="/home">
-                            <Redirect path="/" to="/dashboard" />
+                        <Router>
                             <Switch>
                                 {
                                     routes.map(router => {

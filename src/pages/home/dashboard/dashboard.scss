@@ -1,4 +1,4 @@
-@import '../../../style/common.scss';
+@import '@/style/common.scss';
 
 .dashboard{
     display: flex;
@@ -15,7 +15,9 @@
         padding: 0 4px;
     }
     &-container{
-        overflow-y: auto;
+        width: 100%;
+        overflow: auto;
+        padding-bottom: 100px;
         &::-webkit-scrollbar{ 
             width: 4px;
          
@@ -28,12 +30,91 @@
     }
     &-item{
         width: 100%;
-        height: 100px;
+        min-height: 100px;
         flex-shrink: 0;
         background-color: $normal_font-color;
         box-shadow: 0 0 1px 1px #ccc;
         border-left: 2px solid #21AA3A;
         border-radius: 4px;
         margin: 4px 0;
+        padding: 12px 8px;
+        display: flex;
+        flex-direction: row;
+        &:active{
+            cursor: move;
+        }
+        &-icon{
+            padding: 4px 4px 4px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        &-otherInfo{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        &-title{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            &-text{
+                width: 85%;
+            }
+        }
+        &-close{
+            font-size: 12px;
+            cursor: pointer;
+        }
+        &-briefInfo{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            &-name{
+                background-color: #5CB1CC;
+                padding: 4px 8px;
+                font-size: 14px;
+                color: $normal_font-color;
+                line-height: 20px;
+                border-radius: 10px;
+            }
+            &-headImg{
+                width: 40px;
+                border-radius: 50%;
+            }
+        }
+    }
+    .canBeAppend{
+        border: 2px dashed $primary_red_color;
+    }
+    .dragging{
+        overflow: unset;
+    }
+    &-addTask{
+        display: flex;
+        justify-content: center;
+        padding: 8px 0;
+        border: 2px dashed $primary_red_color;
+        color: $primary_red_color;
+        cursor: pointer;
+        border-radius: 4px;
+        &-icon{
+            font-size: 20px;
+        }
+    }
+    &-form{
+        display: flex;
+        flex-direction: column;
+        &-item{
+            display: flex;
+            margin: 8px 0;
+        }
+        &-key{
+            min-width: 100px;
+            display: inline-block;
+            text-align: right;
+            margin-right: 24px;
+        }
     }
 }

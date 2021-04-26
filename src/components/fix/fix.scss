@@ -1,0 +1,29 @@
+@import '@/style/common.scss';
+
+.fix{
+    width: 18px;
+    height: 18px;
+    border-radius: 24%;
+    background-color: $weak_success_color;
+    position: relative;
+    &-x{
+        background-color: $normal_font_color;
+        width: 50%;
+        height: 2px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 30%;
+    }
+    &-y{
+        background-color: $normal_font_color;
+        width: 2px;
+        height: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 30%;
+    }
+}

@@ -1,4 +1,4 @@
-@import '../../style/common.scss';
+@import '@/style/common.scss';
 
 .home{
     height: 100vh;
@@ -23,33 +23,22 @@
         }
         &-head{
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             color: $normal_font_color;
             align-items: center;
-            padding: 12px 0;
+            justify-content: center;
+            padding: 24px 0;
+            margin-bottom: 12px;
             &-img{
-             width: 80px;
-             height: 80px;
+             width: 40px;
+             height: 40px;
              border-radius: 50%;
-             margin-right: 4px;
-             padding: 16px 0;
-             box-sizing: content-box;
+             margin-right: 8px;
              cursor: pointer;
             }
-            &-info{
-                display: flex;
-                padding-bottom: 12px;
-                align-items: flex-end;
-                cursor: pointer;          
-            }
             &-name{
-                margin-right: 4px;
                 font-size: 16px;
                 line-height: 16px;
-            }
-            &-icon{
-                font-size: 12px;
-                color: $dark_font_color;
             }
          }
         
@@ -58,6 +47,7 @@
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+        overflow: hidden;
     }
     &-topBar{
         height: 66px;
@@ -87,6 +77,6 @@
         background-color: $normal_font_color;
         box-shadow: -1px 0 2px 1px #ddd, 1px 0 2px 1px #ddd;
         padding: 8px 12px;
-        overflow: hidden;
+        height: 50%;
     }
 }

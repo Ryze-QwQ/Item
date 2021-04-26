@@ -1,0 +1,44 @@
+@import '@/style/common.scss';
+
+.project{
+    .ant-collapse-content > .ant-collapse-content-box {
+        padding: 0;
+    }
+    &-task{
+        display: flex;
+        border-bottom: 1px solid $dark_font_color;
+        display: flex;
+        align-items: center;
+        padding: 12px 8px;
+        &-title{
+            margin: 0 8px;
+        }
+    }
+    &-status{
+        padding: 0 8px;
+        border-radius: 8px;
+        color: $normal_font-color;
+        font-size: 12px;
+    }
+    .pending{
+        background-color: $normal_icon_color;
+    }
+    .processing{
+        background-color: $primary_color;
+    }
+    .blocking{
+        background-color: $primary_red_color;
+    }
+    .finished{
+        background-color: $primark_success_color;
+    }
+    &-item{
+        &-name{
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        &-owner{
+            margin-right: 8px;
+        }
+    }
+}
