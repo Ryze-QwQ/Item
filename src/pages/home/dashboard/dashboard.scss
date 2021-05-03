@@ -116,5 +116,19 @@
             text-align: right;
             margin-right: 24px;
         }
+        &-option{
+            display: flex;
+            align-items: center;
+            .icon{
+                margin-right: 8px;
+            }
+        }
+        &-headImg{
+            width: 20px;
+            height: 20px;
+            background-color: $dark_font_color;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
     }
 }

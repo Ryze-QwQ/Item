@@ -13,7 +13,7 @@ export default class Grade extends Component {
     render() {
         const { level, style, className } = this.props;
         return (
-            <div className={this.className}>
+            <div className={this.className + ' icon'}>
                 {
                     level === 1 ?
                         <ArrowUpOutlined style={{ color: '#ff0a54', fontSize: '16px', ...style }} className={className} />

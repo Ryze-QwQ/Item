@@ -8,7 +8,7 @@ async function postData(url, params) {
     try {
         const result = await axios({
             url: baseURL + url,
-            params: params,
+            data: params,
             method: 'post',
             timeout: reqTimeout
         })

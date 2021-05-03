@@ -5,7 +5,7 @@ import './dashboard.scss';
 import { DashboardStore } from './dashboard.store';
 import head from '@/assets/head.jpg';
 import { CloseOutlined, PlusOutlined, ExclamationCircleOutlined } from '@ant-design/icons/lib';
-import { Modal, Input, Select } from 'antd';
+import { Modal, Input, Select, InputNumber } from 'antd';
 import { Fix, Feature, Grade } from '@/components';
 
 @observer
@@ -116,11 +116,13 @@ class Dashboard extends Component {
         this.setState({
             addTaskModalVisible: false
         })
+        this.store.createTask()
     }
     handleAddTaskCancel = () => {
         this.setState({
             addTaskModalVisible: false
         })
+        this.store.clearFormData();
     }
     handleOpenDetail = () => {
         alert("双击了")
@@ -129,7 +131,7 @@ class Dashboard extends Component {
     render() {
         const { state } = this.store;
         const { isPending, isInProcess, isBlocked, isdragging, addTaskModalVisible } = this.state;
-        const { pendingTask, inProcessTask, blockedTask, finishedTask } = state;
+        const { pendingTask, inProcessTask, blockedTask, finishedTask, allProjects, allUserName, formData } = state;
         return (
             <div className={this.className}>
                 <div className={this.className + '-lane'}>
@@ -148,7 +150,7 @@ class Dashboard extends Component {
                                             <div className={this.className + '-item dragger'}>
                                                 <div className={this.className + '-item-icon'}>
                                                     {
-                                                        item.type === 1 ? <Fix /> : <Feature />
+                                                        item.type === 1 ? <Feature /> : <Fix />
                                                     }
                                                     <Grade level={item.level} />
                                                 </div>
@@ -188,7 +190,7 @@ class Dashboard extends Component {
                                         <div className={this.className + '-item'}>
                                             <div className={this.className + '-item-icon'}>
                                                 {
-                                                    item.type === 1 ? <Fix /> : <Feature />
+                                                    item.type === 1 ? <Feature /> : <Fix />
                                                 }
                                                 <Grade level={item.level} />
                                             </div>
@@ -224,7 +226,7 @@ class Dashboard extends Component {
                                         <div className={this.className + '-item'}>
                                             <div className={this.className + '-item-icon'}>
                                                 {
-                                                    item.type === 1 ? <Fix /> : <Feature />
+                                                    item.type === 1 ? <Feature /> : <Fix />
                                                 }
                                                 <Grade level={item.level} />
                                             </div>
@@ -259,7 +261,7 @@ class Dashboard extends Component {
                                         <div className={this.className + '-item'}>
                                             <div className={this.className + '-item-icon'}>
                                                 {
-                                                    item.type === 1 ? <Fix /> : <Feature />
+                                                    item.type === 1 ? <Feature /> : <Fix />
                                                 }
                                                 <Grade level={item.level} />
                                             </div>
@@ -284,39 +286,87 @@ class Dashboard extends Component {
                     <div className={this.className + '-form'}>
                         <div className={this.className + '-form-item'}>
                             <span className={this.className + '-form-key'}>任务名*</span>
-                            <Input style={{ width: 200 }} />
+                            <Input style={{ width: 200 }} allowClear={true} maxLength={12} value={formData.title} onChange={(e) => this.store.handleInputChange(e, 'title')} />
                         </div>
                         <div className={this.className + '-form-item'}>
                             <span className={this.className + '-form-key'}>所属项目*</span>
-                            <Select defaultValue="紧急" style={{ width: 200 }}>
-                                <Select.Option value="1">紧急</Select.Option>
+                            <Select defaultValue="请选择" style={{ width: 200 }} onSelect={this.store.handleChange('projectId')}>
+                                {
+                                    allProjects.map(item => {
+                                        return (
+                                            <Select.Option value={item.projectId} key={item.id}>
+                                                {item.name}
+                                            </Select.Option>
+                                        )
+                                    })
+                                }
                             </Select>
                         </div>
                         <div className={this.className + '-form-item'}>
                             <span className={this.className + '-form-key'}>任务类型*</span>
-                            <Select defaultValue="紧急" style={{ width: 200 }}>
-                                <Select.Option value="1">紧急</Select.Option>
+                            <Select defaultValue="请选择" style={{ width: 200 }} onSelect={this.store.handleChange('type')}>
+                                <Select.Option value={1}>
+                                    <div className={this.className + '-form-option'}>
+                                        <Feature />
+                                        <span>业务开发</span>
+                                    </div>
+                                </Select.Option>
+                                <Select.Option value={2} >
+                                    <div className={this.className + '-form-option'}>
+                                        <Fix />
+                                        <span>Bug处理</span>
+                                    </div>
+                                </Select.Option>
                             </Select>
                         </div>
                         <div className={this.className + '-form-item'}>
                             <span className={this.className + '-form-key'}>优先级*</span>
-                            <Select defaultValue="紧急" style={{ width: 200 }}>
-                                <Select.Option value="1">紧急</Select.Option>
+                            <Select defaultValue="请选择" style={{ width: 200 }} onSelect={this.store.handleChange('level')}>
+                                <Select.Option value={1}>
+                                    <div className={this.className + '-form-option'}>
+                                        <Grade level={1} />
+                                        <span>紧急</span>
+                                    </div>
+                                </Select.Option>
+                                <Select.Option value={2}>
+                                    <div className={this.className + '-form-option'}>
+                                        <Grade level={2} />
+                                        <span>重要</span>
+                                    </div>
+                                </Select.Option>
+                                <Select.Option value={3}>
+                                    <div className={this.className + '-form-option'}>
+                                        <Grade level={3} />
+                                        <span>常规</span>
+                                    </div>
+                                </Select.Option>
                             </Select>
                         </div>
                         <div className={this.className + '-form-item'}>
                             <span className={this.className + '-form-key'}>经办人</span>
-                            <Select defaultValue="紧急" style={{ width: 200 }}>
-                                <Select.Option value="1">紧急</Select.Option>
+                            <Select defaultValue="请选择" style={{ width: 200 }} onSelect={this.store.handleChange('owner')}>
+                                {
+                                    allUserName.map(item => {
+                                        return (
+                                            <Select.Option value={item.username} key={item.id} >
+                                                <div className={this.className + '-form-option'}>
+                                                    <img src={item.photo} alt="" className={this.className + '-form-headImg'} />
+                                                    <span>{item.username}</span>
+                                                </div>
+                                            </Select.Option>
+                                        )
+                                    })
+                                }
                             </Select>
                         </div>
                         <div className={this.className + '-form-item'}>
                             <span className={this.className + '-form-key'}>计划使用时长</span>
-                            <Input style={{ width: 200 }} />
+                            <InputNumber style={{ width: 100, marginRight: '8px' }} defaultValue={3} onChange={this.store.handleChange('spendDay')} />
+                            <span>天</span>
                         </div>
                         <div className={this.className + '-form-item'}>
                             <span className={this.className + '-form-key'}>描述</span>
-                            <Input.TextArea />
+                            <Input.TextArea placeholder="任务简述" maxLength={255} />
                         </div>
                     </div>
                 </Modal>
