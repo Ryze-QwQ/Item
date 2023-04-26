@@ -1,0 +1,82 @@
+@import '@/style/common.scss';
+
+.home{
+    height: 100vh;
+    display: flex;
+    background-color: $primary_background_color;
+    &-leftMenu{
+        display: flex;
+        flex-direction: column;
+        width: 160px;
+        height: 100%;
+        background-color: $primary_left_menu_color;
+        .ant-menu{
+            flex-grow: 1;
+            background-color: $primary_left_menu_color !important;
+            color: $dark_font_color;
+            .ant-menu-item-selected{
+                background-color: $selected_left_menu_color !important;
+                border-left: $selected_item_border;
+                box-sizing: content-box;
+                padding-left: 20px;
+            }
+        }
+        &-head{
+            display: flex;
+            flex-direction: row;
+            color: $normal_font_color;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 0;
+            margin-bottom: 12px;
+            &-img{
+             width: 40px;
+             height: 40px;
+             border-radius: 50%;
+             margin-right: 8px;
+             cursor: pointer;
+            }
+            &-name{
+                font-size: 16px;
+                line-height: 16px;
+            }
+         }
+        
+    }
+    &-rightPart{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        overflow: hidden;
+    }
+    &-topBar{
+        height: 66px;
+        display: flex;
+        justify-content: space-between;
+        flex-shrink: 0;
+        align-items: center;
+        background-color: $normal_font_color;
+        box-shadow: 1px 0 1px 1px #ccc;
+        padding: 0 20px;
+        &-title{
+            font-size: 16px;
+        }
+        &-icon{
+            font-size: 18px;
+            padding: 0 20px;
+            color: $normal_icon_color !important;
+            cursor: pointer;
+            &:hover{
+                color: $dark_icon_color !important;
+            }
+        }
+    }
+    &-content{
+        flex: 1;
+        margin: 16px 16px 0 16px;
+        background-color: $normal_font_color;
+        box-shadow: -1px 0 2px 1px #ddd, 1px 0 2px 1px #ddd;
+        padding: 8px 12px;
+        height: 50%;
+    }
+}

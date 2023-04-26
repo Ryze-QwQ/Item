@@ -1,0 +1,17 @@
+@import '@/style/common.scss';
+
+.fix{
+    width: 18px;
+    height: 18px;
+    border-radius: 24%;
+    background-color: $primary_warn_color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-circular{
+        width: 50%;
+        height: 50%;
+        background-color: $normal_font_color;
+        border-radius: 50%;
+    }
+}
